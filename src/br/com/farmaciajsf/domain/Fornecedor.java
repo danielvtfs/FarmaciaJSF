@@ -1,17 +1,15 @@
 package br.com.farmaciajsf.domain;
 
 public class Fornecedor {
-	
-	
 	private Long id;
 	private String descricao;
 	
-
+	
 	public Long getId() {
 		return id;
 	}
-	public void setId(long i) {
-		this.id = i;
+	public void setId(long id) {
+		this.id = id;
 	}
 	public String getDescricao() {
 		return descricao;
@@ -20,5 +18,10 @@ public class Fornecedor {
 		this.descricao = descricao;
 	}
 	
+	@Override
+	public String toString() {
+		String saida = id + " - " + descricao;
+		return saida;
+	}
 	
-}
+} 

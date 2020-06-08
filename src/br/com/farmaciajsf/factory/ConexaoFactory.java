@@ -11,6 +11,7 @@ public class ConexaoFactory {
 	private static final String URL = "jdbc:mysql://localhost:3306/farmaciajsf?useTimezone=true&serverTimezone=UTC";
 
 	public static Connection conectar() throws SQLException {
+		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		Connection conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
 		return conexao;
 	}
