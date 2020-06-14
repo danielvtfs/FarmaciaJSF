@@ -12,9 +12,8 @@
 	</ui:define>
 	<ui:define name="conteudo">
 
-		<h:form id="frnfornecedores">
-			<p:dataTable id="tbfornecedores"
-				widgetVar="tabelaFornecedor"
+		<h:form id="frmfornecedores">
+			<p:dataTable id="tbfornecedores" widgetVar="tabelaFornecedor"
 				emptyMessage="Nenhum registro encontrado."
 				value="#{MBFornecedor.fornecedores}" var="item"
 				filteredValue="#{MBFornecedor.fornecedoresFiltrados}"
@@ -31,6 +30,7 @@
 					filterBy="#{item.descricao}">
 					<h:outputText value="#{item.descricao}" />
 				</p:column>
+
 
 				<p:column headerText="Opções">
 					<p:commandButton icon="ui-icon-trash"
@@ -62,15 +62,16 @@
 			appendTo="@(body)">
 			<h:form id="painelInputForm">
 				<h:panelGrid id="painelInputGrid" columns="2">
-					<p:outputLabel value="Descrição:" />
-					<h:inputText size="30" maxlength="50"
-						value="#{MBFornecedor.fornecedor.descricao}" />
+					<p:outputLabel value="Descrição:" for="txtDescNovo" />
+					<h:inputText size="30" maxlength="50" id="txtDescNovo"
+						value="#{MBFornecedor.fornecedor.descricao}" required="true"
+						requiredMessage="O campo descrição é obrigatório" />
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<p:commandButton value="Gravar"
 						actionListener="#{MBFornecedor.novo()}"
-						oncomplete="PF('dlgForNovo').hide(); PF('tabelaFornecedor').clearFilters(); "
-						update=":frnfornecedores:tbfornecedores :msgGlobal" />
+						oncomplete="handleLoginRequest(xhr, status, args, 'dlgForNovo', 'tbfornecedores');"
+						update=":frmfornecedores:tbfornecedores :msgGlobal" />
 					<p:commandButton value="Cancelar"
 						onclick="PF('dlgForNovo').hide();" />
 				</h:panelGrid>
@@ -94,8 +95,8 @@
 					<p:commandButton value="Excluir"
 						actionListener="#{MBFornecedor.excluir()}"
 						oncomplete="PF('dlgExcluir').hide(); PF('tabelaFornecedor').clearFilters(); "
-						update=":frnfornecedores:tbfornecedores :msgGlobal" />
-					<p:commandButton value="Cancelar"
+						update=":frmfornecedores:tbfornecedores :msgGlobal" />
+					<p:commandButton value="Cancelar" process="@this"
 						onclick="PF('dlgExcluir').hide();" />
 				</h:panelGrid>
 
@@ -112,16 +113,19 @@
 					<h:outputText value="Código:" />
 					<h:outputText value="#{MBFornecedor.fornecedor.id}" />
 
-					<h:outputText value="Descrição:" />
-					<h:inputText value="#{MBFornecedor.fornecedor.descricao}" />
+					<h:outputText value="Descrição: " for="txtedit" />
+					<h:inputText value="#{MBFornecedor.fornecedor.descricao}"
+						required="true" requiredMessage="O campo descrição é obrigatório"
+						id="txtedit" />
 				</h:panelGrid>
 
 				<h:panelGrid columns="2">
 					<p:commandButton value="Editar"
 						actionListener="#{MBFornecedor.editar()}"
-						oncomplete="PF('dlgEditar').hide(); PF('tabelaFornecedor').clearFilters(); "
-						update=":frnfornecedores:tbfornecedores :msgGlobal" />
-					<p:commandButton value="Cancelar" onclick="PF('dlgEditar').hide();" />
+						oncomplete="handleLoginRequest(xhr, status, args, 'dlgEditar', 'tbfornecedores'); "
+						update=":frmfornecedores:tbfornecedores :msgGlobal" />
+					<p:commandButton value="Cancelar" process="@this"
+						onclick="PF('dlgEditar').hide();" />
 				</h:panelGrid>
 
 			</h:form>

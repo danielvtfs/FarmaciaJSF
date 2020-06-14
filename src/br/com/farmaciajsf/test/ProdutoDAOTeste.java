@@ -20,7 +20,7 @@ public class ProdutoDAOTeste {
 		produto.setQuantidade(5);
 		produto.setPreco(120.00);
 		Fornecedor fornecedor = new Fornecedor();
-		fornecedor.setId(23);
+		fornecedor.setId(23L);
 		produto.setFornecedor(fornecedor);
 
 		ProdutoDAO pdao = new ProdutoDAO();
@@ -65,7 +65,7 @@ public class ProdutoDAOTeste {
 		p.setPreco(500);
 		
 		Fornecedor f = new Fornecedor();
-		f.setId(22);
+		f.setId(22L);
 		p.setFornecedor(f);
 		
 		ProdutoDAO pdao = new ProdutoDAO();
